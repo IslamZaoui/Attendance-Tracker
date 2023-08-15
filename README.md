@@ -7,33 +7,34 @@ Attendance Record Now Easier 🔥
 ## Features
 
 - Easy to set up your groups or classes
-- Cross platform
-- Light weight
+- Cross-platform
+- Lightweight
 - Simple and Fast
-- Import and Export Database in json file
+- Import and Export Database in JSON file
 - import Students from xlsx file
 - Export Attendance by Session or Total
+- Record Attendance with Manually or with QRcode Scanner
 
 
 ## Screenshots
 
-
-
+<p float="left">
+  <img src="/static/screenshots/screenshot1.jpg?raw=true"  width="20%">
+  <img src="/static/screenshots/screenshot1.jpg?raw=true"  width="20%">
+  <img src="/static/screenshots/screenshot1.jpg?raw=true"  width="20%">
+</p>
 
 ## Installation
 
-Install my-project with npm
+Install Attendance app [Here](https://github.com/IslamZaoui/Attendance/releases)
 
-```bash
-  npm install my-project
-  cd my-project
-```
+**Android and Windows x64 only available for now**
     
 ## Powered by
 
  - [Svelte](https://svelte.dev/) framework for making the app
- - [Skeleton](https://skeleton.dev/) UI library for make the app good looking app
- - [capacitorjs](https://capacitorjs.com/solution/svelte) For Build native mobile apps with web technology
+ - [Skeleton](https://skeleton.dev/) UI library for making the app good looking app
+ - [capacitorjs](https://capacitorjs.com/solution/svelte) For Building native mobile apps with web technology
 
 
 ## Feedback
