@@ -1,0 +1,120 @@
+/*place global styles here */
+html,
+body {
+	@apply h-full;
+}
+
+.toaster .wrapper .base {
+	@apply bg-surface-500;
+	@apply dark:bg-surface-50;
+}
+
+.toaster .wrapper .base .message {
+	@apply text-white;
+	@apply dark:text-black;
+}
+
+.mainlayout {
+	background-image: url($lib/asset/pxfuel.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+@font-face {
+	font-family: 'Andika';
+	src: url('/fonts/Andika/Andika-Regular.ttf');
+}
+
+.prose :is(h2, h3, h4, h5, h6) {
+	margin-top: var(--size-8);
+	margin-bottom: var(--size-3);
+}
+
+.prose p:not(:is(h2, h3, h4, h5, h6) + p) {
+	margin-top: var(--size-7);
+}
+
+.prose :is(ul, ol) {
+	list-style-type: '✨';
+	padding-left: var(--size-5);
+}
+
+.prose :is(ul, ol) li {
+	margin-block: var(--size-2);
+	padding-inline-start: var(--size-2);
+}
+
+.prose pre:not(.codeblock-pre) {
+	max-inline-size: 100%;
+	padding: 1rem;
+	border-radius: 8px;
+	tab-size: 2;
+}
+
+/* Add some color */
+
+/* Heading colors */
+.prose {
+	@apply p-4;
+	@apply m-2;
+}
+
+.prose h1 {
+	color: rgb(var(--color-primary-500));
+}
+
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+	color: rgb(var(--color-error-700));
+}
+
+/* Paragraph text colors */
+.prose p,
+.prose ol,
+.prose ul,
+.prose li {
+	@apply dark:text-white;
+	@apply text-black;
+}
+
+/* Strong text colors */
+.prose strong {
+	color: rgb(var(--color-tertiary-800));
+}
+
+.prose :not(pre) code:not(.codeblock-code) {
+	color: rgb(var(--color-primary-900));
+	background-color: rgb(var(--color-surface-400));
+	@apply p-1;
+	@apply rounded;
+}
+
+.prose a {
+	@apply text-blue-900;
+	@apply dark:text-blue-500;
+}
+
+@keyframes fade-in-out {
+	0%,
+	100% {
+		opacity: 0;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.2);
+	}
+}
+
+@keyframes beat {
+	0%,
+	100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2);
+	}
+}
