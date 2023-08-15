@@ -35,15 +35,15 @@
 						<td class="flex flex-col md:flex-row gap-2">
 							<button
 								class="chip chip-sm variant-ghost-success"
-								on:click={() => GotoRecordAttendanc(group)}>Record Attendance</button
+								on:click={() => GotoRecordAttendanc(group)}>Record</button
 							>
 							<button
 								class="chip chip-sm variant-ghost-warning"
-								on:click={() => GotoViewAttendanc(group)}>View Attendance</button
+								on:click={() => GotoViewAttendanc(group)}>View</button
 							>
 							<button
 								class="chip chip-sm variant-ghost-warning"
-								on:click={() => GotoViewTotalAttendanc(group)}>View Total Attendance</button
+								on:click={() => GotoViewTotalAttendanc(group)}>View Total</button
 							>
 						</td>
 					</tr>

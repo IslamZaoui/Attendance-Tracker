@@ -3,7 +3,7 @@
 	import { type PopupSettings, popup, ListBox, ListBoxItem } from '@skeletonlabs/skeleton';
 
 	export let Sessions: Session[];
-	let comboboxValue: Session = <Session>{};
+	let comboboxValue: Session | null = null;
 
 	$: SelectedSession.set(comboboxValue);
 
