@@ -2,7 +2,6 @@
 	import '../theme.postcss';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
-	import autoAnimate from '@formkit/auto-animate';
 	import { AppShell, Modal } from '@skeletonlabs/skeleton';
 	import Header from '$lib/components/appshell/Header.svelte';
 	import SideBar from '$lib/components/appshell/SideBar.svelte';
@@ -15,7 +14,7 @@
 	export let data;
 </script>
 
-<main class="mainlayout h-full" use:autoAnimate={{ duration: 1000 }}>
+<main class="mainlayout h-full">
 	<Toaster />
 	<Modal />
 	<AppShell>
