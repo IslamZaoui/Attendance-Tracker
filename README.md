@@ -15,26 +15,14 @@ Attendance Tracking Now Easier 🔥
 - Record Attendance with Manually or with QRcode Scanner
 
 
-## Screenshots
+## Screenshot
 
 <div style="display: flex; overflow-x: scroll; width: 100%;">
-    <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
-        <img src="/static/screenshots/screenshot1.jpg" alt="Screenshot 1" style="width: auto; height: 100%;">
-    </div>
-    <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
-        <img src="/static/screenshots/screenshot2.png" alt="Screenshot 2" style="width: auto; height: 100%;">
-    </div>
-    <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
-        <img src="/static/screenshots/screenshot3.png" alt="Screenshot 3" style="width: auto; height: 100%;">
-    </div>
     <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
         <img src="/static/screenshots/screenshot4.png" alt="Screenshot 4" style="width: auto; height: 100%;">
     </div>
     <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
         <img src="/static/screenshots/screenshot5.png" alt="Screenshot 5" style="width: auto; height: 100%;">
-    </div>
-    <div style="flex: none; height: 70vh; overflow: hidden;">
-        <img src="/static/screenshots/screenshot6.png" alt="Screenshot 6" style="width: auto; height: 100%;">
     </div>
 </div>
 
