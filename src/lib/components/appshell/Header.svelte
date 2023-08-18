@@ -43,7 +43,7 @@
 			</button>
 			<a href="/" class="flex gap-2 items-center">
 				<img class="w-7" src="{base}/favicon.png" alt="" />
-				<strong>Attendance</strong>
+				<strong>Attendance Tracker</strong>
 			</a>
 		</div>
 	</svelte:fragment>

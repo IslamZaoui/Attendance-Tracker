@@ -1,5 +1,8 @@
 <script lang="ts">
 	import {
+	ChangeFirstname,
+		ChangeGroup,
+		ChangeLasttname,
 		GetTotalStudentPresense,
 		getGroups,
 		getTotalAbsencesWithoutJustification
@@ -43,14 +46,14 @@
 			<span>Firstname</span>
 			<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
 				<input type="text" placeholder="Example" bind:value={firstname} />
-				<button class="variant-filled-secondary">change</button>
+				<button class="variant-filled-secondary" on:click={()=>ChangeFirstname(firstname,student.id)}>change</button>
 			</div>
 		</label>
 		<label class="label">
 			<span>Lastname</span>
 			<div class="input-group input-group-divider grid-cols-[auto_1fr_auto]">
 				<input type="text" placeholder="Example" bind:value={lastname} />
-				<button class="variant-filled-secondary">change</button>
+				<button class="variant-filled-secondary" on:click={()=>ChangeLasttname(lastname,student.id)}>change</button>
 			</div>
 		</label>
 		<label class="label">
@@ -61,7 +64,7 @@
 						<option value={group.id}>{group.name}</option>
 					{/each}
 				</select>
-				<button class="variant-filled-secondary">change</button>
+				<button class="variant-filled-secondary" on:click={()=>ChangeGroup(groupid,student.id)}>change</button>
 			</div>
 		</label>
 	</div>

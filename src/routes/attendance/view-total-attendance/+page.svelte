@@ -27,8 +27,8 @@
 	<title>View Total Attendance | {$SelectedGroup?.name}</title>
 </svelte:head>
 
-<div class="p-4 gap-5 h-[89vh] flex flex-col">
-	<header class="card variant-ghost-surface flex flex-col p-4 gap-4">
+<div class="p-2 gap-2 h-[89vh] flex flex-col">
+	<header class="card variant-ghost-surface flex flex-col p-2 gap-2">
 		<div class="">
 			<ol class="breadcrumb">
 				<li class="crumb"><a class="anchor" href="/">Main Page</a></li>
@@ -38,7 +38,7 @@
 				<li>View Total Attendance | Group {$SelectedGroup?.name}</li>
 			</ol>
 		</div>
-		<div class="flex md:flex-row gap-4 flex-col items-end">
+		<div class="flex md:flex-row gap-2 flex-col items-end">
 			<InputChip
 				name="search"
 				placeholder="Search..."
@@ -55,7 +55,7 @@
 		</div>
 	</header>
 	<article
-		class="p-4 card overflow-y-auto flex gap-3 flex-row flex-grow justify-center variant-ghost-surface"
+		class="p-2 card overflow-y-auto flex gap-3 flex-row flex-grow justify-center variant-ghost-surface"
 	>
 		{#if PageLoaded}
 			<ViewTotalAttendanceList {students} {search} />

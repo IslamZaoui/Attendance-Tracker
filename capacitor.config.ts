@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-	appId: 'com.attendance.app',
-	appName: 'Attendance',
+	appId: 'com.attendancetracker.app',
+	appName: 'Attendance Tracker',
 	webDir: 'build',
 	bundledWebRuntime: true,
 	server: {

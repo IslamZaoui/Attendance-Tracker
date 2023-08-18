@@ -53,7 +53,7 @@ export function DeleteGroup(group: Group) {
 					const studentIds = studentsInGroup.map((student) => student.id);
 
 					// Delete attendance records for each student
-					await db.attendances.where({'student':studentIds}).delete();
+					await db.attendances.where({ 'student': studentIds }).delete();
 
 					// Step 2: Delete students in the group
 					await db.students.where({ groupid: group.id }).delete();
@@ -586,7 +586,7 @@ export async function SetStudentParticipation(
 		await db.attendances
 			.where({ student: studentId, session: sessionId })
 			.modify({ participated: participated });
-	} catch (e) {}
+	} catch (e) { }
 }
 
 export function sleep(ms: number): Promise<void> {
@@ -629,5 +629,35 @@ export async function GetTotalStudentPresense(studentId: number) {
 	} catch (e) {
 		console.error('Error calculating total Presense:', e);
 		return 0;
+	}
+}
+
+export async function ChangeFirstname(NewFirstName:string,id?: number) {
+	try {
+		await db.students.where({id:id}).modify({ firstname: NewFirstName });
+		ShowToast('success',`Firstname changed to ${NewFirstName}`)
+	}
+	catch (e) {
+		ShowToast('error',`Failed Firstname changed to ${NewFirstName}`)
+	}
+}
+
+export async function ChangeLasttname(NewLastName:string,id?: number) {
+	try {
+		await db.students.where({id:id}).modify({ lastname: NewLastName });
+		ShowToast('success',`Firstname changed to ${NewLastName}`)
+	}
+	catch (e) {
+		ShowToast('error',`Failed Firstname changed to ${NewLastName}`)
+	}
+}
+
+export async function ChangeGroup(NewGroupID:number,id?: number) {
+	try {
+		await db.students.where({id:id}).modify({ groupid: NewGroupID });
+		ShowToast('success',`Group changed`)
+	}
+	catch (e) {
+		ShowToast('error',`Failed to Change Group`)
 	}
 }

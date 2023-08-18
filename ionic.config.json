@@ -1,5 +1,5 @@
 {
-	"name": "attendance",
+	"name": "attendance-tracker",
 	"integrations": {
 		"capacitor": {}
 	},

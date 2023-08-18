@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SelectedSession } from '$lib/Store';
 	import {
 		GotoRecordAttendanc,
 		GotoViewAttendanc,
@@ -18,7 +19,8 @@
 </script>
 
 {#if groups.length > 0}
-	<div class="table-container w-fit">
+	<div class="table-container md:w-1/2 w-full flex flex-col gap-2">
+		<!--
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -55,6 +57,30 @@
 				</tr>
 			</tfoot>
 		</table>
+	-->
+		{#each list as group (group.id)}
+			<div class="card flex w-full">
+				<div class="p-2 w-full">
+					<span>Group: {group.name}</span>
+				</div>
+				<div class="p-2 flex gap-1 w-full justify-end">
+					<button
+						class="chip chip-sm variant-ghost-primary"
+						on:click={() => GotoRecordAttendanc(group)}>Record</button
+					>
+					<span class='flex flex-col gap-1'>
+						<button
+							class="chip chip-sm variant-ghost-success"
+							on:click={() => GotoViewAttendanc(group)}>View Session</button
+						>
+						<button
+							class="chip chip-sm variant-ghost-success"
+							on:click={() => GotoViewTotalAttendanc(group)}>View Total</button
+						>
+					</span>
+				</div>
+			</div>
+		{/each}
 	</div>
 {:else}
 	<div class="flex flex-col gap-5 p-6">

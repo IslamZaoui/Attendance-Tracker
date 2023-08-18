@@ -3,7 +3,7 @@
 	import { backOut } from 'svelte/easing';
 	import { onMount } from 'svelte';
 
-	const lines = ['Attendance', '', 'Record', '', 'Now Easier', '🔥'];
+	const lines = ['Attendance', '', 'Tracking', '', 'Now Easier', '🔥'];
 
 	let animate = false;
 

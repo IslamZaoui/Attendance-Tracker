@@ -32,8 +32,8 @@
 	<title>Attendance List</title>
 </svelte:head>
 
-<div class="p-4 gap-5 h-[89vh] flex flex-col">
-	<header class="card variant-ghost-surface flex flex-col p-4 gap-4">
+<div class="p-2 gap-2 h-[89vh] flex flex-col">
+	<header class="card variant-ghost-surface flex flex-col p-2 gap-2">
 		<div class="">
 			<ol class="breadcrumb">
 				<li class="crumb"><a class="anchor" href="/">Main Page</a></li>
@@ -41,7 +41,7 @@
 				<li>Attendance</li>
 			</ol>
 		</div>
-		<div class="flex md:flex-row gap-4 flex-col items-end">
+		<div class="flex md:flex-row gap-2 flex-col items-end">
 			<InputChip
 				name="search"
 				placeholder="Search..."
@@ -50,7 +50,7 @@
 				minlength={1}
 				class="md:w-1/4"
 			/>
-			<div class="flex flex-row items-end gap-4">
+			<div class="flex flex-row items-end gap-2">
 				<SessionList {Sessions} />
 				<button class="btn variant-filled-primary w-fit h-min" on:click={NewSession}
 					>New Session</button
@@ -59,7 +59,7 @@
 		</div>
 	</header>
 	<article
-		class="p-4 card overflow-y-auto flex gap-3 flex-row flex-grow justify-center variant-ghost-surface"
+		class="p-2 card overflow-y-auto flex gap-3 flex-row flex-grow justify-center variant-ghost-surface"
 	>
 		{#if PageLoaded}
 			<AttendanceList {groups} {search} />

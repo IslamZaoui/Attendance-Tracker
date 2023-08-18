@@ -1,7 +1,6 @@
+# Attendance Tracker
 
-# Attendance
-
-Attendance Record Now Easier 🔥
+Attendance Tracking Now Easier 🔥
 
 
 ## Features
@@ -18,11 +17,26 @@ Attendance Record Now Easier 🔥
 
 ## Screenshots
 
-<p float="left">
-  <img src="/static/screenshots/screenshot1.jpg?raw=true"  width="20%">
-  <img src="/static/screenshots/screenshot1.jpg?raw=true"  width="20%">
-  <img src="/static/screenshots/screenshot1.jpg?raw=true"  width="20%">
-</p>
+<div style="display: flex; overflow-x: scroll; width: 100%;">
+    <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
+        <img src="/static/screenshots/screenshot1.jpg" alt="Screenshot 1" style="width: auto; height: 100%;">
+    </div>
+    <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
+        <img src="/static/screenshots/screenshot2.png" alt="Screenshot 2" style="width: auto; height: 100%;">
+    </div>
+    <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
+        <img src="/static/screenshots/screenshot3.png" alt="Screenshot 3" style="width: auto; height: 100%;">
+    </div>
+    <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
+        <img src="/static/screenshots/screenshot4.png" alt="Screenshot 4" style="width: auto; height: 100%;">
+    </div>
+    <div style="flex: none; height: 70vh; margin-right: 10px; overflow: hidden;">
+        <img src="/static/screenshots/screenshot5.png" alt="Screenshot 5" style="width: auto; height: 100%;">
+    </div>
+    <div style="flex: none; height: 70vh; overflow: hidden;">
+        <img src="/static/screenshots/screenshot6.png" alt="Screenshot 6" style="width: auto; height: 100%;">
+    </div>
+</div>
 
 ## Installation
 
@@ -35,6 +49,7 @@ Install Attendance app [Here](https://github.com/IslamZaoui/Attendance/releases)
  - [Svelte](https://svelte.dev/) framework for making the app
  - [Skeleton](https://skeleton.dev/) UI library for making the app good looking app
  - [capacitorjs](https://capacitorjs.com/solution/svelte) For Building native mobile apps with web technology
+ - [Tauri](https://tauri.app/) For Building an optimized, secure, and frontend-independent application for multi-platform deployment.
 
 
 ## Feedback
@@ -45,4 +60,3 @@ Contact me in [Github](https://github.com/IslamZaoui) or [Linkedin](https://www.
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-

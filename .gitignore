@@ -11,3 +11,5 @@ vite.config.ts.timestamp-*
 /src-tauri/target
 .vscode
 resources/android/**/*
+Versions-Fixes
+android

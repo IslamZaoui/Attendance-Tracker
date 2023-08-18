@@ -13,7 +13,8 @@
 </script>
 
 {#if groups.length > 0}
-	<div class="table-container w-fit">
+	<div class="table-container md:w-1/2 w-full flex flex-col gap-2">
+		<!--
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -45,6 +46,23 @@
 				</tr>
 			</tfoot>
 		</table>
+		-->
+		{#each list as group (group.id)}
+			<div class="card flex h-fit">
+				<div class="p-2 w-full">
+					<span>Group: {group.name}</span>
+				</div>
+				<div class="p-2 flex flex-col gap-1 w-1/2 justify-end">
+					<button
+						class="chip chip-sm variant-ghost-success"
+						on:click={() => GotoManageStudents(group)}>Manage Students</button
+					>
+					<button class="chip chip-sm variant-ghost-error" on:click={() => DeleteGroup(group)}
+						>Delete Group</button
+					>
+				</div>
+			</div>
+		{/each}
 	</div>
 {:else}
 	<div class="flex flex-col gap-5 p-6">

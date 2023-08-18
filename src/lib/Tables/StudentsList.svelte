@@ -14,7 +14,8 @@
 </script>
 
 {#if students.length > 0}
-	<div class="table-container w-fit">
+	<div class="table-container md:w-1/2 w-full flex flex-col gap-2">
+		<!--
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -53,6 +54,29 @@
 				</tr>
 			</tfoot>
 		</table>
+	-->
+		{#each list as student (student.id)}
+			<div class="card flex">
+				<div class="p-2 w-full flex flex-col gap-1">
+					<span>{student.lastname} {student.firstname}</span>
+					<span class='text-gray-500'>{student.regis_num}</span>
+				</div>
+				<div class="p-2 flex flex-col gap-1 w-full justify-end">
+					<button
+						class="chip chip-sm variant-ghost-success"
+						on:click={() => {
+							GotoStudentInfo(student, group);
+						}}>Student Info</button
+					>
+					<button
+						class="chip chip-sm variant-ghost-error"
+						on:click={() => {
+							DeleteStudent(student);
+						}}>Delete Student</button
+					>
+				</div>
+			</div>
+		{/each}
 	</div>
 {:else}
 	<div class="flex flex-col gap-4 items-center p-6">
