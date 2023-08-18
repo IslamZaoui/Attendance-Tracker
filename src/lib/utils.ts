@@ -645,10 +645,10 @@ export async function ChangeFirstname(NewFirstName:string,id?: number) {
 export async function ChangeLasttname(NewLastName:string,id?: number) {
 	try {
 		await db.students.where({id:id}).modify({ lastname: NewLastName });
-		ShowToast('success',`Firstname changed to ${NewLastName}`)
+		ShowToast('success',`Lastname changed to ${NewLastName}`)
 	}
 	catch (e) {
-		ShowToast('error',`Failed Firstname changed to ${NewLastName}`)
+		ShowToast('error',`Failed Lastname changed to ${NewLastName}`)
 	}
 }
 
