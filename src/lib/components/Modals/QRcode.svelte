@@ -72,7 +72,7 @@
 </script>
 
 <main class="card h-fit flex-grow p-1 flex md:flex-row flex-col items-start justify-start gap-2">
-	<reader id="reader" class="relative min-w-[250px] w-full md:w-1/2 min-h-[250px] bg-black">
+	<reader id="reader" class="relative min-w-[250px] w-full md:w-1/2 min-h-[250px] bg-black" autofocus>
 		{#if scanning}
 			<button class="btn variant-filled-error absolute top-0 right-0 m-2 z-10" on:click={stop}
 				>stop</button

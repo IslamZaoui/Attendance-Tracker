@@ -1,13 +1,8 @@
 <script lang="ts">
-	import {
-		searchStudentsWithAttendance,
-		searchStudentsWithTotal,
-		updateAttendance
-	} from '$lib/utils';
-	import { SlideToggle } from '@skeletonlabs/skeleton';
+	import { searchStudentsWithTotal } from '$lib/utils';
 
 	export let students: StudentWithTotals[];
-	export let search: string[];
+	export let search: string;
 
 	let list: StudentWithTotals[];
 
@@ -22,23 +17,20 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>Registration number</th>
-					<th>Firstname</th>
-					<th>Lastname</th>
-					<th>Total Presence</th>
+					<th>Student</th>
+					<th>Total Unjustified absence</th>
 					<th>Total Participation</th>
-					<th>Justify absence</th>
 				</tr>
 			</thead>
 			<tbody>
-				{#each list as student (student?.id)}
+				{#each list ?? [] as student (student?.id)}
 					<tr>
-						<td>{student.regis_num}</td>
-						<td>{student.firstname}</td>
-						<td>{student.lastname}</td>
-						<td>{student.presentTotal}</td>
+						<td><div class="flex flex-col gap-1">
+							<span class="text-gray-500">{student.regis_num}</span>
+							<span>{student.lastname} {student.firstname}</span>
+						</div></td>
+						<td>{student.unjustifiedAbsencesTotal}</td>
 						<td>{student.participationTotal}</td>
-						<td>{student.jusAbsTotal}</td>
 					</tr>
 				{/each}
 			</tbody>

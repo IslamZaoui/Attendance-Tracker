@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { searchStudentsWithAttendance, updateAttendance } from '$lib/utils';
-	import { SlideToggle } from '@skeletonlabs/skeleton';
+	import Present from '$lib/components/buttons/Attendance.svelte';
+	import { searchStudentsWithAttendance } from '$lib/utils';
 
 	export let students: StudentWithAttendance[];
-	export let search: string[];
+	export let search: String;
 
 	let list: StudentWithAttendance[];
 
@@ -14,49 +14,18 @@
 </script>
 
 {#if students.length > 0}
-	<div class="table-container w-fit">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>Registration number</th>
-					<th>Firstname</th>
-					<th>Lastname</th>
-					<th>Present</th>
-					<th>Participated</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#each list as student (student.attendance?.id)}
-					<tr>
-						<td>{student.student.regis_num}</td>
-						<td>{student.student.firstname}</td>
-						<td>{student.student.lastname}</td>
-						{#if student.attendance}
-							<td
-								><SlideToggle
-									name="Present"
-									on:change={async () => await updateAttendance(student.attendance)}
-									bind:checked={student.attendance.present}
-								/></td
-							>
-							<td
-								><SlideToggle
-									name="Participated"
-									on:change={async () => await updateAttendance(student.attendance)}
-									disabled={!student.attendance.present}
-									bind:checked={student.attendance.participated}
-								/></td
-							>
-						{/if}
-					</tr>
-				{/each}
-			</tbody>
-			<tfoot>
-				<tr>
-					<th colspan="2">Total Students: {students.length}</th>
-				</tr>
-			</tfoot>
-		</table>
+	<div class="table-container md:w-1/2 w-full flex flex-col gap-2">
+		{#each list as student (student.student.id)}
+			<div class="card flex">
+				<div class="p-2 w-full flex flex-col gap-1">
+					<span class="text-gray-500">{student.student.regis_num}</span>
+					<span>{student.student.lastname} {student.student.firstname}</span>
+				</div>
+				<div class="flex gap-2">
+					<Present attendance={student.attendance} />
+				</div>
+			</div>
+		{/each}
 	</div>
 {:else}
 	<div class="flex flex-col gap-4 items-center p-6">

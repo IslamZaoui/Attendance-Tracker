@@ -36,7 +36,6 @@ interface StudentWithAttendance {
 }
 
 interface StudentWithTotals extends Student {
-	presentTotal: number;
 	participationTotal: number;
-	jusAbsTotal: number;
+	unjustifiedAbsencesTotal: number;
 }

@@ -33,15 +33,6 @@
 			</div>
 		{/if}
 	</div>
-	<div>
-		<ol class="flex gap-2">
-			<li class="crumb"><a class="anchor" href="/groups">Groups</a></li>
-			<li class="crumb-separator" aria-hidden>|</li>
-			<li class="crumb"><a class="anchor" href="/attendance">Attendance</a></li>
-			<li class="crumb-separator" aria-hidden>|</li>
-			<li class="crumb"><a class="anchor" href="/about">About</a></li>
-		</ol>
-	</div>
 </div>
 
 <style lang="scss">

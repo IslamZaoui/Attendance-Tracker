@@ -252,81 +252,62 @@ export async function ImportDB(file: File): Promise<void> {
 	}
 }
 
-export function searchGroups(searchTerms: string[], existingGroups: Group[]): Group[] {
-	const matchingGroups: Group[] = [];
+export function searchGroups(searchTerm: string, existingGroups: Group[]): Group[] {
+	const searchTermLower = searchTerm.toLowerCase();
 
-	for (const term of searchTerms) {
-		const searchTermLower = term.toLowerCase();
+	// Search by name
+	const groupsByName = existingGroups.filter((group) =>
+		group.name.toLowerCase().includes(searchTermLower)
+	);
 
-		// Search by name
-		const groupsByName = existingGroups.filter((group) =>
-			group.name.toLowerCase().includes(searchTermLower)
-		);
-		matchingGroups.push(...groupsByName);
-
-		// Search by ID (numeric value)
-		if (!isNaN(Number(term))) {
-			const groupId = Number(term);
-			const groupById = existingGroups.find((group) => group.id === groupId);
-			if (groupById) {
-				matchingGroups.push(groupById);
-			}
-		}
-	}
-
-	return matchingGroups;
+	return groupsByName;
 }
 
-export function searchStudents(existingStudents: Student[], searchTerms: string[]): Student[] {
+
+export function searchStudents(existingStudents: Student[], searchTerm: string): Student[] {
 	const matchingStudents: Student[] = [];
+	const searchTermLower = searchTerm.toLowerCase();
 
-	for (const term of searchTerms) {
-		const searchTermLower = term.toLowerCase();
+	// Search by firstname
+	const studentsByFirstname = existingStudents.filter((student) =>
+		student.firstname.toLowerCase().includes(searchTermLower)
+	);
+	matchingStudents.push(...studentsByFirstname);
 
-		// Search by firstname
-		const studentsByFirstname = existingStudents.filter((student) =>
-			student.firstname.toLowerCase().includes(searchTermLower)
-		);
-		matchingStudents.push(...studentsByFirstname);
+	// Search by lastname
+	const studentsByLastname = existingStudents.filter((student) =>
+		student.lastname.toLowerCase().includes(searchTermLower)
+	);
+	matchingStudents.push(...studentsByLastname);
 
-		// Search by lastname
-		const studentsByLastname = existingStudents.filter((student) =>
-			student.lastname.toLowerCase().includes(searchTermLower)
-		);
-		matchingStudents.push(...studentsByLastname);
-
-		// Search by registration number
-		const studentsByRegisNum = existingStudents.filter((student) =>
-			student.regis_num.toLowerCase().includes(searchTermLower)
-		);
-		matchingStudents.push(...studentsByRegisNum);
-	}
+	// Search by registration number
+	const studentsByRegisNum = existingStudents.filter((student) =>
+		student.regis_num.toLowerCase().includes(searchTermLower)
+	);
+	matchingStudents.push(...studentsByRegisNum);
 
 	return matchingStudents;
 }
+
 
 export function searchStudentsWithAttendance(
 	existingStudents: StudentWithAttendance[],
-	searchTerms: string[]
+	searchTerm: string
 ): StudentWithAttendance[] {
-	const matchingStudents: StudentWithAttendance[] = [];
+	const searchTermLower = searchTerm.toLowerCase();
 
-	for (const term of searchTerms) {
-		const searchTermLower = term.toLowerCase();
-
-		const studentsWithAttendanceByName = existingStudents.filter(
-			({ student }) =>
-				student.firstname.toLowerCase().includes(searchTermLower) ||
-				student.lastname.toLowerCase().includes(searchTermLower) ||
-				student.regis_num.toLowerCase().includes(searchTermLower)
-		);
-		matchingStudents.push(...studentsWithAttendanceByName);
-	}
+	const matchingStudents = existingStudents.filter(
+		({ student }) =>
+			student.firstname.toLowerCase().includes(searchTermLower) ||
+			student.lastname.toLowerCase().includes(searchTermLower) ||
+			student.regis_num.toLowerCase().includes(searchTermLower)
+	);
 
 	return matchingStudents;
 }
 
-export async function calculateTotalsForGroup(groupId: number): Promise<StudentWithTotals[]> {
+
+export async function calculateTotalUnjustifiedAbsencesForGroup(groupId: number): Promise<StudentWithTotals[]> {
 	return await db.transaction('r', db.students, db.attendances, async () => {
 		const students = await db.students.where('groupid').equals(groupId).toArray();
 
@@ -335,18 +316,16 @@ export async function calculateTotalsForGroup(groupId: number): Promise<StudentW
 				if (student.id) {
 					const attendances = await db.attendances.where('student').equals(student.id).toArray();
 
-					const presentTotal = attendances.filter((att) => att.present).length;
 					const participationTotal = attendances.filter((att) => att.participated).length;
-					const jusAbsTotal = attendances.filter((att) => att.jus_abs).length;
+					const unjustifiedAbsencesTotal = attendances.filter((att) => !att.jus_abs && !att.present).length; // Calculate unjustified absences
 
 					return {
 						...student,
-						presentTotal,
 						participationTotal,
-						jusAbsTotal
+						unjustifiedAbsencesTotal,
 					};
 				} else {
-					return <StudentWithTotals>{};
+					return {} as StudentWithTotals;
 				}
 			})
 		);
@@ -355,36 +334,35 @@ export async function calculateTotalsForGroup(groupId: number): Promise<StudentW
 	});
 }
 
+
 export function searchStudentsWithTotal(
 	existingStudents: StudentWithTotals[],
-	searchTerms: string[]
+	searchTerm: string
 ): StudentWithTotals[] {
 	const matchingStudents: StudentWithTotals[] = [];
+	const searchTermLower = searchTerm.toLowerCase();
 
-	for (const term of searchTerms) {
-		const searchTermLower = term.toLowerCase();
+	// Search by firstname
+	const studentsByFirstname = existingStudents.filter((student) =>
+		student.firstname.toLowerCase().includes(searchTermLower)
+	);
+	matchingStudents.push(...studentsByFirstname);
 
-		// Search by firstname
-		const studentsByFirstname = existingStudents.filter((student) =>
-			student.firstname.toLowerCase().includes(searchTermLower)
-		);
-		matchingStudents.push(...studentsByFirstname);
+	// Search by lastname
+	const studentsByLastname = existingStudents.filter((student) =>
+		student.lastname.toLowerCase().includes(searchTermLower)
+	);
+	matchingStudents.push(...studentsByLastname);
 
-		// Search by lastname
-		const studentsByLastname = existingStudents.filter((student) =>
-			student.lastname.toLowerCase().includes(searchTermLower)
-		);
-		matchingStudents.push(...studentsByLastname);
-
-		// Search by registration number
-		const studentsByRegisNum = existingStudents.filter((student) =>
-			student.regis_num.toLowerCase().includes(searchTermLower)
-		);
-		matchingStudents.push(...studentsByRegisNum);
-	}
+	// Search by registration number
+	const studentsByRegisNum = existingStudents.filter((student) =>
+		student.regis_num.toLowerCase().includes(searchTermLower)
+	);
+	matchingStudents.push(...studentsByRegisNum);
 
 	return matchingStudents;
 }
+
 
 export async function exportToExcel(
 	studentTotals: StudentWithTotals[],
@@ -632,32 +610,53 @@ export async function GetTotalStudentPresense(studentId: number) {
 	}
 }
 
-export async function ChangeFirstname(NewFirstName:string,id?: number) {
+export async function ChangeFirstname(NewFirstName: string, id?: number) {
 	try {
-		await db.students.where({id:id}).modify({ firstname: NewFirstName });
-		ShowToast('success',`Firstname changed to ${NewFirstName}`)
+		await db.students.where({ id: id }).modify({ firstname: NewFirstName });
+		ShowToast('success', `Firstname changed to ${NewFirstName}`)
 	}
 	catch (e) {
-		ShowToast('error',`Failed Firstname changed to ${NewFirstName}`)
+		ShowToast('error', `Failed Firstname changed to ${NewFirstName}`)
 	}
 }
 
-export async function ChangeLasttname(NewLastName:string,id?: number) {
+export async function ChangeLasttname(NewLastName: string, id?: number) {
 	try {
-		await db.students.where({id:id}).modify({ lastname: NewLastName });
-		ShowToast('success',`Lastname changed to ${NewLastName}`)
+		await db.students.where({ id: id }).modify({ lastname: NewLastName });
+		ShowToast('success', `Lastname changed to ${NewLastName}`)
 	}
 	catch (e) {
-		ShowToast('error',`Failed Lastname changed to ${NewLastName}`)
+		ShowToast('error', `Failed Lastname changed to ${NewLastName}`)
 	}
 }
 
-export async function ChangeGroup(NewGroupID:number,id?: number) {
+export async function ChangeGroup(NewGroupID: number, id?: number) {
 	try {
-		await db.students.where({id:id}).modify({ groupid: NewGroupID });
-		ShowToast('success',`Group changed`)
+		await db.students.where({ id: id }).modify({ groupid: NewGroupID });
+		ShowToast('success', `Group changed`)
 	}
 	catch (e) {
-		ShowToast('error',`Failed to Change Group`)
+		ShowToast('error', `Failed to Change Group`)
+	}
+}
+
+export function formatDate(input: string | Date, longFormat = true): string {
+	const options: Intl.DateTimeFormatOptions = {
+		weekday: longFormat ? 'long' : 'short',
+		month: longFormat ? 'long' : 'short',
+		day: 'numeric',
+		year: 'numeric',
+	};
+
+	if (typeof input === 'string') {
+		const date = new Date(input);
+		if (isNaN(date.getTime())) {
+			throw new Error('Invalid date string');
+		}
+		return date.toLocaleDateString('en-US', options);
+	} else if (input instanceof Date) {
+		return input.toLocaleDateString('en-US', options);
+	} else {
+		throw new Error('Invalid input type');
 	}
 }

@@ -4,16 +4,20 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import {
 		ExportAttSession,
+		formatDate,
 		generateAttendancesForSession,
 		getStudentsWithAttendance
 	} from '$lib/utils.js';
 	import { SelectedGroup, SelectedSession } from '$lib/Store';
 	import ViewAttendanceList from '$lib/Tables/ViewAttendanceList.svelte';
 	import { page } from '$app/stores';
+	import Fa from 'svelte-fa';
+	import { faFileExport } from '@fortawesome/free-solid-svg-icons';
+	import { date } from 'zod';
 
 	let PageLoaded = false;
 	let students: StudentWithAttendance[] = [];
-	let search: string[] = [];
+	let search = '';
 
 	let group: Group = <Group>{};
 	let session: Session = <Session>{};
@@ -35,40 +39,30 @@
 	<title>View Attendance | {$SelectedGroup?.name} {$SelectedSession?.id}</title>
 </svelte:head>
 
-<div class="p-2 gap-2 h-[89vh] flex flex-col">
+<div class="p-2 gap-2 h-full flex flex-col">
 	<header class="card variant-ghost-surface flex flex-col p-2 gap-2">
-		<div class="">
-			<ol class="breadcrumb">
-				<li class="crumb"><a class="anchor" href="/">Main Page</a></li>
-				<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-				<li class="crumb"><a class="anchor" href="/attendance">Attendance</a></li>
-				<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-				<li>View Attendance | Group {$SelectedGroup?.name} Session {$SelectedSession?.id}</li>
-			</ol>
-		</div>
-		<div class="flex md:flex-row gap-2 flex-col items-end">
-			<InputChip
-				name="search"
-				placeholder="Search..."
-				bind:value={search}
-				max={3}
-				minlength={1}
-				class="md:w-1/4"
-			/>
+		<span class="text-center">{group.name}'s Attendance | Session {$SelectedSession?.id} in {formatDate($SelectedSession?.date ?? '')}</span>
+		<div class="flex md:flex-row gap-2 flex-col justify-between">
+			<input class="input md:w-min" type="text" placeholder="Search..." bind:value={search} />
 			<button
-				class="btn variant-filled-primary w-fit"
+				class="btn hidden md:block variant-filled-primary"
 				on:click={() => ExportAttSession(students, session, group, $page.data.currentPlatform)}
-				>Export To Excel</button
+				>Export Attendance</button
 			>
 		</div>
 	</header>
 	<article
-		class="p-2 card overflow-y-auto flex gap-3 flex-row flex-grow justify-center variant-ghost-surface"
+		class="p-2 relative card overflow-y-auto flex gap-3 flex-row flex-grow justify-center variant-ghost-surface"
 	>
 		{#if PageLoaded}
 			<ViewAttendanceList {students} {search} />
 		{:else}
 			<Loading />
 		{/if}
+		<button
+			class="btn-icon md:hidden absolute right-5 bottom-5 variant-filled-primary"
+			on:click={() => ExportAttSession(students, session, group, $page.data.currentPlatform)}
+			><Fa icon={faFileExport} size="24" /></button
+		>
 	</article>
 </div>

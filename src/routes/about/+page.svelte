@@ -12,15 +12,8 @@
 	<title>about</title>
 </svelte:head>
 
-<div class="p-2 gap-2 h-[89vh] flex flex-col">
+<div class="p-2 gap-2 h-full flex flex-col">
 	<header class="card variant-ghost-surface flex flex-col p-2 gap-2">
-		<div class="">
-			<ol class="breadcrumb">
-				<li class="crumb"><a class="anchor" href="/">Main Page</a></li>
-				<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-				<li>about</li>
-			</ol>
-		</div>
 		<div class="flex md:flex-row gap-4 flex-col items-center justify-center">
 			<TabGroup
 				justify="justify-center"
@@ -31,17 +24,17 @@
 				border=""
 				class="w-full"
 			>
-				<Tab bind:group={tabSet} class="bg-surface-500 w-[100px]" name="tab1" value={0}>Creator</Tab
+				<Tab bind:group={tabSet} class="bg-surface-500 w-[100px]" name="tab2" value={0}>App</Tab>
+				<Tab bind:group={tabSet} class="bg-surface-500 w-[100px]" name="tab1" value={1}>Creator</Tab
 				>
-				<Tab bind:group={tabSet} class="bg-surface-500 w-[100px]" name="tab2" value={1}>App</Tab>
 			</TabGroup>
 		</div>
 	</header>
 	<article
 		class="p-2 card overflow-y-auto flex gap-3 flex-row flex-grow justify-center variant-ghost-surface"
 	>
-		{#if tabSet === 0}
-			<div class="card p-4 w-72 shadow-xl">
+		{#if tabSet === 1}
+			<div class="card p-4 w-72 h-fit shadow-xl">
 				<div class="space-y-4">
 					<Avatar src={Me} width="w-16" />
 					<div>
@@ -64,7 +57,7 @@
 				</div>
 				<div class="arrow bg-surface-100-800-token" />
 			</div>
-		{:else if tabSet === 1}
+		{:else if tabSet === 0}
 			<article class="prose">
 				<Readme />
 			</article>

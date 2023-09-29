@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { InputChip } from '@skeletonlabs/skeleton';
 	import { onMount } from 'svelte';
 	import Loading from '$lib/components/Loading.svelte';
 	import { NewSession } from '$lib/utils.js';
@@ -11,7 +10,7 @@
 	let PageLoaded = false;
 	let groups: Group[] = [];
 	let Sessions: Session[] = [];
-	let search: string[] = [];
+	let search = '';
 
 	onMount(async () => {
 		const G = liveQuery(() => db.groups.toArray());
@@ -32,25 +31,11 @@
 	<title>Attendance List</title>
 </svelte:head>
 
-<div class="p-2 gap-2 h-[89vh] flex flex-col">
+<div class="p-2 gap-2 h-full flex flex-col">
 	<header class="card variant-ghost-surface flex flex-col p-2 gap-2">
-		<div class="">
-			<ol class="breadcrumb">
-				<li class="crumb"><a class="anchor" href="/">Main Page</a></li>
-				<li class="crumb-separator" aria-hidden>&rsaquo;</li>
-				<li>Attendance</li>
-			</ol>
-		</div>
-		<div class="flex md:flex-row gap-2 flex-col items-end">
-			<InputChip
-				name="search"
-				placeholder="Search..."
-				bind:value={search}
-				max={3}
-				minlength={1}
-				class="md:w-1/4"
-			/>
-			<div class="flex flex-row items-end gap-2">
+		<div class="flex md:flex-row gap-2 flex-col items-end justify-between">
+			<input class="input md:w-min" type="text" placeholder="Search..." bind:value={search} />
+			<div class="flex flex-row md:w-fit w-full items-end gap-2 justify-between">
 				<SessionList {Sessions} />
 				<button class="btn variant-filled-primary w-fit h-min" on:click={NewSession}
 					>New Session</button

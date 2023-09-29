@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { SelectedSession } from '$lib/Store';
+	import { formatDate } from '$lib/utils';
 	import { type PopupSettings, popup, ListBox, ListBoxItem } from '@skeletonlabs/skeleton';
 
 	export let Sessions: Session[];
@@ -14,10 +15,16 @@
 		closeQuery: '.listbox-item'
 	};
 
+	let lastLength = Sessions.length;
+
 	// Set the initial value of comboboxValue to the first element in Sessions
 	$: {
 		if (Sessions.length > 0 && !comboboxValue) {
-			comboboxValue = Sessions[0];
+			comboboxValue = Sessions[Sessions.length - 1];
+		}
+		if (lastLength !== Sessions.length) {
+			comboboxValue = Sessions[Sessions.length - 1];
+			lastLength = Sessions[Sessions.length - 1].id ?? 0;
 		}
 	}
 </script>
@@ -34,9 +41,12 @@
 	{#if Sessions.length > 0}
 		<ListBox rounded="rounded-none">
 			{#each Sessions as session (session.id)}
-				<ListBoxItem bind:group={comboboxValue} name="medium" value={session}
-					>Session {session.id}</ListBoxItem
-				>
+				<ListBoxItem bind:group={comboboxValue} name="medium" value={session}>
+					<div class="flex gap-1 flex-col">
+						<span>Session {session.id}</span>
+						<span>{formatDate(session.date, false)}</span>
+					</div>
+				</ListBoxItem>
 			{/each}
 		</ListBox>
 	{:else}

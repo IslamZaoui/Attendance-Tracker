@@ -6,9 +6,12 @@
 		GotoViewTotalAttendanc,
 		searchGroups
 	} from '$lib/utils';
+	import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+	import { popup } from '@skeletonlabs/skeleton';
+	import Fa from 'svelte-fa';
 
 	export let groups: Group[];
-	export let search: string[];
+	export let search: string;
 
 	let list: Group[];
 
@@ -20,65 +23,29 @@
 
 {#if groups.length > 0}
 	<div class="table-container md:w-1/2 w-full flex flex-col gap-2">
-		<!--
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th colspan="2" />
-				</tr>
-			</thead>
-			<tbody>
-				{#each list as group (group.id)}
-					<tr>
-						<td>{group.id}</td>
-						<td>{group.name}</td>
-						<td class="flex flex-col md:flex-row gap-2">
-							<button
-								class="chip chip-sm variant-ghost-success"
-								on:click={() => GotoRecordAttendanc(group)}>Record</button
-							>
-							<button
-								class="chip chip-sm variant-ghost-warning"
-								on:click={() => GotoViewAttendanc(group)}>View</button
-							>
-							<button
-								class="chip chip-sm variant-ghost-warning"
-								on:click={() => GotoViewTotalAttendanc(group)}>View Total</button
-							>
-						</td>
-					</tr>
-				{/each}
-			</tbody>
-			<tfoot>
-				<tr>
-					<th colspan="2">Total Groups: {groups.length}</th>
-				</tr>
-			</tfoot>
-		</table>
-	-->
 		{#each list as group (group.id)}
-			<div class="card flex w-full">
-				<div class="p-2 w-full">
-					<span>Group: {group.name}</span>
-				</div>
-				<div class="p-2 flex gap-1 w-full justify-end">
+			<div class="card p-2 flex w-full">
+				<span class="h3 w-full h-full" on:mousedown={() => GotoRecordAttendanc(group)}
+					>{group.name}</span
+				>
+				<button
+					class="btn w-min"
+					use:popup={{ event: 'click', target: `popup${group.name}`, placement: 'bottom' }}
+					><Fa icon={faEllipsisVertical} /></button
+				>
+			</div>
+			<div class="card variant-filled-surface" data-popup="popup{group.name}">
+				<span class="flex flex-col gap-1 p-2">
 					<button
-						class="chip chip-sm variant-ghost-primary"
-						on:click={() => GotoRecordAttendanc(group)}>Record</button
+						class="chip chip-sm variant-ghost-success"
+						on:click={() => GotoViewAttendanc(group)}>View Session</button
 					>
-					<span class='flex flex-col gap-1'>
-						<button
-							class="chip chip-sm variant-ghost-success"
-							on:click={() => GotoViewAttendanc(group)}>View Session</button
-						>
-						<button
-							class="chip chip-sm variant-ghost-success"
-							on:click={() => GotoViewTotalAttendanc(group)}>View Total</button
-						>
-					</span>
-				</div>
+					<button
+						class="chip chip-sm variant-ghost-success"
+						on:click={() => GotoViewTotalAttendanc(group)}>View Total</button
+					>
+					<div class="arrow variant-filled-surface" />
+				</span>
 			</div>
 		{/each}
 	</div>
